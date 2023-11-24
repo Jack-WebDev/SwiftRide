@@ -1,0 +1,25 @@
+2023/11/23-08:47:33.094 18f8 Reusing MANIFEST /tmp/flutter_tools.WMGLPR/flutter_tools_chrome_device.YZYWGW/Default/IndexedDB/http_localhost_40131.indexeddb.leveldb/MANIFEST-000001
+2023/11/23-08:47:33.095 18f8 Recovering log #27
+2023/11/23-08:47:33.113 18f8 Reusing old log /tmp/flutter_tools.WMGLPR/flutter_tools_chrome_device.YZYWGW/Default/IndexedDB/http_localhost_40131.indexeddb.leveldb/000027.log 
+2023/11/23-08:47:33.726 1905 Level-0 table #32: started
+2023/11/23-08:47:33.804 1905 Level-0 table #32: 3149 bytes OK
+2023/11/23-08:47:34.038 1905 Delete type=0 #27
+2023/11/23-08:47:34.038 18f9 Manual compaction at level-0 from '\x00\x0a\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0b\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/11/23-08:48:12.446 18f9 Compacting 1@1 + 1@2 files
+2023/11/23-08:48:12.550 18f9 Generated table #33@1: 41 keys, 2897 bytes
+2023/11/23-08:48:12.550 18f9 Compacted 1@1 + 1@2 files => 2897 bytes
+2023/11/23-08:48:12.595 18f9 compacted to: files[ 0 0 1 0 0 0 0 ]
+2023/11/23-08:48:12.596 18f9 Delete type=2 #32
+2023/11/23-08:48:12.596 18f9 Delete type=2 #29
+2023/11/23-09:12:31.084 18f9 Level-0 table #35: started
+2023/11/23-09:12:31.234 18f9 Level-0 table #35: 2701 bytes OK
+2023/11/23-09:12:31.327 18f9 Delete type=0 #31
+2023/11/23-09:12:31.327 18f9 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2023/11/23-09:12:31.327 18f9 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x02\x01\x02\x01C\x00f\x00i\x00r\x00e\x00b\x00a\x00s\x00e\x00:\x00a\x00u\x00t\x00h\x00U\x00s\x00e\x00r\x00:\x00A\x00I\x00z\x00a\x00S\x00y\x00C\x00k\x005\x00F\x00l\x00z\x00B\x00N\x00D\x00j\x007\x000\x002\x00N\x009\x00H\x00W\x00w\x00x\x00o\x00x\x00d\x00m\x00S\x00x\x00N\x00L\x00C\x00r\x00_\x00C\x00V\x00c\x00:\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]' @ 462 : 1
+2023/11/23-09:12:31.327 18f9 Compacting 1@1 + 1@2 files
+2023/11/23-09:12:31.399 18f9 Generated table #36@1: 36 keys, 2738 bytes
+2023/11/23-09:12:31.399 18f9 Compacted 1@1 + 1@2 files => 2738 bytes
+2023/11/23-09:12:31.560 18f9 compacted to: files[ 0 0 1 0 0 0 0 ]
+2023/11/23-09:12:31.561 18f9 Delete type=2 #35
+2023/11/23-09:12:31.561 18f9 Delete type=2 #33
+2023/11/23-09:12:31.561 18f9 Manual compaction at level-1 from '\x00\x02\x01\x02\x01C\x00f\x00i\x00r\x00e\x00b\x00a\x00s\x00e\x00:\x00a\x00u\x00t\x00h\x00U\x00s\x00e\x00r\x00:\x00A\x00I\x00z\x00a\x00S\x00y\x00C\x00k\x005\x00F\x00l\x00z\x00B\x00N\x00D\x00j\x007\x000\x002\x00N\x009\x00H\x00W\x00w\x00x\x00o\x00x\x00d\x00m\x00S\x00x\x00N\x00L\x00C\x00r\x00_\x00C\x00V\x00c\x00:\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]' @ 462 : 1 .. (end); will stop at (end)

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uberscousin/services/auth_service.dart';
 import 'package:uberscousin/views/Onboarding/register.dart';
 import 'package:uberscousin/views/Onboarding/reset_password.dart';
 
@@ -17,6 +18,12 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   Widget _buildEmailTF() {
     return Column(
@@ -162,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildSocialBtn(AssetImage logo) {
     return GestureDetector(
-      onTap: () => {print("Button Pressed!")},
+      onTap: () => {AuthService().signInWithGoogle()},
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -301,7 +308,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-
     );
   }
 }

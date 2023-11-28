@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:uberscousin/views/get_lift.dart';
+import 'package:uberscousin/views/GetLift/get_lift.dart';
 import 'package:uberscousin/views/OfferLift/offer_lift.dart';
 
 class LiftOptions extends StatefulWidget {

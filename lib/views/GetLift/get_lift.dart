@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uberscousin/views/activities.dart';
-import 'package:uberscousin/views/home_page.dart';
 import 'package:uberscousin/views/Profile/profile_home.dart';
+import 'package:uberscousin/views/GetLift/activities.dart';
+import 'package:uberscousin/views/GetLift/home_page.dart';
 
 class GetLift extends StatefulWidget {
   const GetLift({super.key});

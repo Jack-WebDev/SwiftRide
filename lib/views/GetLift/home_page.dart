@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,6 +11,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
+
+  CollectionReference _listDetails =
+      FirebaseFirestore.instance.collection("offerlift");
+
+  List<String> IDs = [];
+
+  Future getIDs() async {
+    await FirebaseFirestore.instance
+        .collection("offerlift")
+        .get()
+        .then((snapshot) => snapshot.docs.forEach((val) {
+              IDs.add(val.reference.id);
+            }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,38 +77,6 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 30,
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    //   children: [
-                    //     const Row(
-                    //       children: [
-                    //         Icon(Icons.home),
-                    //         SizedBox(
-                    //           width: 20,
-                    //         ),
-                    //         Column(
-                    //           crossAxisAlignment: CrossAxisAlignment.start,
-                    //           children: [
-                    //             Text(
-                    //               "Home",
-                    //               style: TextStyle(fontWeight: FontWeight.bold),
-                    //             ),
-                    //             SizedBox(
-                    //               height: 5,
-                    //             ),
-                    //             Text("34 Maximus Avenue")
-                    //           ],
-                    //         ),
-                    //       ],
-                    //     ),
-                    //     const SizedBox(
-                    //       width: 40,
-                    //     ),
-                    //     IconButton(
-                    //         onPressed: () {},
-                    //         icon: Icon(Icons.arrow_forward_ios_sharp))
-                    //   ],
-                    // ),
                     const ListTile(
                       title: Text("Home"),
                       subtitle: Text("24 Max Ave"),
@@ -167,9 +150,107 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 100,
+                          width: 250,
+                          child: FutureBuilder(
+                            future: getIDs(),
+                            builder: (context, snapshot) {
+                              return ListView.builder(
+                                  itemCount: IDs.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      title: _card(
+                                          _listDetails.doc(IDs[index]).get()),
+                                    );
+                                  });
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
             ))));
   }
+}
+
+Widget _card(Future<DocumentSnapshot> listDetails) {
+  CollectionReference _listDetails =
+      FirebaseFirestore.instance.collection("offerlift");
+
+  Future<void> updateLift() {
+    return _listDetails
+        .doc("3fFOg93r40UpW55uwcSu")
+        .update({
+          "Driver Name": "Jack",
+        })
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  Future<void> deleteUser() {
+    return _listDetails
+        .doc('3fFOg93r40UpW55uwcSu')
+        .delete()
+        .then((value) => print("User Deleted"))
+        .catchError((error) => print("Failed to delete user: $error"));
+  }
+
+  return FutureBuilder(
+    future: listDetails,
+    builder: (context, snapshot) {
+      if (snapshot.hasError) {
+        return Text("Something went wrong");
+      }
+
+      if (snapshot.hasData && !snapshot.data!.exists) {
+        return Text("Document does not exist");
+      }
+
+      if (snapshot.connectionState == ConnectionState.done) {
+        Map<String, dynamic> data =
+            snapshot.data!.data() as Map<String, dynamic>;
+        return Column(
+          children: [
+            Text("Driver Name: ${data["Driver Name"]}"),
+            SizedBox(
+              height: 5,
+            ),
+            Text("Car Capacity: ${data["Car Capacity"]}"),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Row(
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        updateLift();
+                      },
+                      child: Text("Edit Lift")),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        deleteUser();
+                      },
+                      child: Text("Delete Lift"))
+                ],
+              ),
+            )
+          ],
+        );
+      }
+
+      return Text("loading");
+    },
+  );
 }

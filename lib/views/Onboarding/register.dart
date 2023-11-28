@@ -16,6 +16,15 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
+  @override
+  void dispose() {
+    _userNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   void _register() async {
     if (_passwordController.text != _confirmPasswordController.text) {
       showDialog(
@@ -51,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: TextField(
             controller: _userNameController,
             autofocus: true,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             style: const TextStyle(
               color: Colors.white,
               fontFamily: 'Plus Jakarta Sans',

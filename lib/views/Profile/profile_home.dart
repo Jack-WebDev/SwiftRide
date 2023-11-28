@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uberscousin/views/Profile/manage_account.dart';
@@ -143,6 +144,18 @@ class _ProfileState extends State<Profile> {
                           child: const ListTile(
                             title: Text("Manage Account"),
                             leading: Icon(Icons.person_2),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            await FirebaseAuth.instance.signOut();
+                          },
+                          child: const ListTile(
+                            title: Text("Sign Out"),
+                            leading: Icon(Icons.exit_to_app),
                           ),
                         ),
                       ],

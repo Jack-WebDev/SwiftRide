@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
       FirebaseFirestore.instance.collection("offerlift");
 
   List<String> IDs = [];
+  List<Map<String, dynamic>> _searchResult = [];
 
   Future getIDs() async {
     await FirebaseFirestore.instance
@@ -25,6 +26,29 @@ class _HomePageState extends State<HomePage> {
               IDs.add(val.reference.id);
             }));
   }
+
+  Future<void> searchFromFirebase(String query) async {
+    try {
+      final result = await FirebaseFirestore.instance
+          .collection('offerlift')
+          .where('Destination', isEqualTo: query)
+          .get();
+
+      setState(() {
+        _searchResult =
+            result.docs.map((e) => e.data() as Map<String, dynamic>).toList();
+      });
+    } catch (e) {
+      print('Error searching from Firebase: $e');
+    }
+  }
+
+  // Future getLocation() async {
+  //   await FirebaseFirestore.instance
+  //       .collection("offerlift")
+  //       .where("Destination", isEqualTo: _searchController)
+  //       .get();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +97,9 @@ class _HomePageState extends State<HomePage> {
                             borderSide: BorderSide(color: Colors.white)),
                       ),
                       style: const TextStyle(color: Colors.white),
+                      onChanged: (query) {
+                        searchFromFirebase(query);
+                      },
                     ),
                     const SizedBox(
                       height: 30,
@@ -174,6 +201,38 @@ class _HomePageState extends State<HomePage> {
                         )
                       ],
                     ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: _searchResult.length,
+                        itemBuilder: (context, index) {
+                          // return ListTile(
+                          //   title: Text(_searchResult[index]['Driver Name']),
+                          //   subtitle: Text(_searchResult[index]['Destination']),
+                          // );
+                          return SizedBox(
+                            child: Column(children: [
+                              Text(
+                                  "Driver Name: ${_searchResult[index]['Driver Name']}"),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                  "Destination: ${_searchResult[index]['Destination']}"),
+                              Text(
+                                  "Place of Departure: ${_searchResult[index]['Place of Departure']}"),
+                              Text(
+                                  "Car Capacity: ${_searchResult[index]['Car Capacity']}"),
+                              Text(
+                                  "Lift Available: ${_searchResult[index]['Lift Available']}"),
+                              Text(
+                                  "Date and Time: ${_searchResult[index]['Date']}"),
+
+                              // SizedBox(height: 5,),
+                            ]),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -184,6 +243,14 @@ class _HomePageState extends State<HomePage> {
 Widget _card(Future<DocumentSnapshot> listDetails) {
   CollectionReference _listDetails =
       FirebaseFirestore.instance.collection("offerlift");
+
+  Future<void> isLiftAvailable() {
+    return _listDetails
+        .doc("D96cJN9aN0IUivuE5m0O")
+        .update({"Lift Available": "false"})
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
 
   Future<void> updateLift() {
     return _listDetails
@@ -227,25 +294,6 @@ Widget _card(Future<DocumentSnapshot> listDetails) {
             SizedBox(
               height: 10,
             ),
-            Center(
-              child: Row(
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        updateLift();
-                      },
-                      child: Text("Edit Lift")),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        deleteUser();
-                      },
-                      child: Text("Delete Lift"))
-                ],
-              ),
-            )
           ],
         );
       }

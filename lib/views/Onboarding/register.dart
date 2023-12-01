@@ -45,42 +45,6 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  Widget _buildNameTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text(
-          'Name',
-          style: kLabelStyle,
-        ),
-        const SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          child: TextField(
-            controller: _userNameController,
-            autofocus: true,
-            keyboardType: TextInputType.text,
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: 'Plus Jakarta Sans',
-            ),
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-              hintText: 'Enter your username',
-              hintStyle: kHintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildEmailTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,10 +255,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      _buildNameTF(),
-                      const SizedBox(
-                        height: 20,
-                      ),
                       _buildEmailTF(),
                       const SizedBox(
                         height: 20.0,

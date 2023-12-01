@@ -70,6 +70,14 @@ Widget _card(Future<DocumentSnapshot> listDetails) {
   CollectionReference _listDetails =
       FirebaseFirestore.instance.collection("offerlift");
 
+  Future<void> isLiftAvailable() {
+    return _listDetails
+        .doc("IY4PAlonDDiF23HLRjUZ")
+        .update({"Lift Available": "false"})
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
   Future<void> updateLift() {
     return _listDetails
         .doc("3fFOg93r40UpW55uwcSu")
@@ -127,7 +135,15 @@ Widget _card(Future<DocumentSnapshot> listDetails) {
                       onPressed: () {
                         deleteUser();
                       },
-                      child: Text("Delete Lift"))
+                      child: Text("Delete Lift")),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        isLiftAvailable();
+                      },
+                      child: Text("Get Lift"))
                 ],
               ),
             )

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -98,85 +97,86 @@ class _HomePageState extends State<HomePage> {
             value: SystemUiOverlayStyle.light,
             child: Center(
                 child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF73AEF5),
-                    Color(0xFF61A4F1),
-                    Color(0xFF478DE0),
-                    Color(0xFF398AE5),
-                  ],
-                  stops: [0.1, 0.4, 0.7, 0.9],
-                ),
-              ),
-              child: Column(
-                children: [
-                  Text("Offer Lift?"),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  TextField(
-                    controller: _driverName,
-                    decoration: InputDecoration(hintText: "Driver name"),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    controller: _destination,
-                    decoration: InputDecoration(hintText: "Destination"),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    controller: _departure,
-                    decoration: InputDecoration(hintText: "Place of departure"),
-                  ),
-                  Column(
-                    children: [
-                      TextField(
-                        controller: _date,
-                        decoration: InputDecoration(
-                            hintText: "Date",
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  _selectDate(context);
-                                },
-                                icon: Icon(Icons.calendar_month))),
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xFF73AEF5),
+                          Color(0xFF61A4F1),
+                          Color(0xFF478DE0),
+                          Color(0xFF398AE5),
+                        ],
+                        stops: [0.1, 0.4, 0.7, 0.9],
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  TextField(
-                    controller: _time,
-                    decoration: InputDecoration(hintText: "Time (15:00)"),
-                  ),
-                  TextField(
-                    controller: _streetName,
-                    decoration: InputDecoration(hintText: "Street Name"),
-                  ),
-                  TextField(
-                    controller: _town,
-                    decoration: InputDecoration(hintText: "Town/Neighbourhood"),
-                  ),
-                  TextField(
-                    controller: _capacity,
-                    decoration: InputDecoration(hintText: "Car Capacity"),
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        createLift();
-                      },
-                      child: Text("Offer Lift!"))
-                ],
-              ),
-            ))));
+                    ),
+                    child: Column(
+                      children: [
+                        Text("Offer Lift?"),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        TextField(
+                          controller: _driverName,
+                          decoration: InputDecoration(hintText: "Driver name"),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          controller: _destination,
+                          decoration: InputDecoration(hintText: "Destination"),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          controller: _departure,
+                          decoration:
+                              InputDecoration(hintText: "Place of departure"),
+                        ),
+                        Column(
+                          children: [
+                            TextField(
+                              controller: _date,
+                              decoration: InputDecoration(
+                                  hintText: "Date",
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        _selectDate(context);
+                                      },
+                                      icon: Icon(Icons.calendar_month))),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextField(
+                          controller: _time,
+                          decoration: InputDecoration(hintText: "Time (15:00)"),
+                        ),
+                        TextField(
+                          controller: _streetName,
+                          decoration: InputDecoration(hintText: "Street Name"),
+                        ),
+                        TextField(
+                          controller: _town,
+                          decoration:
+                              InputDecoration(hintText: "Town/Neighbourhood"),
+                        ),
+                        TextField(
+                          controller: _capacity,
+                          decoration: InputDecoration(hintText: "Car Capacity"),
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              createLift();
+                            },
+                            child: Text("Offer Lift!"))
+                      ],
+                    )))));
   }
 }

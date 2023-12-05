@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:uberscousin/services/auth_service.dart';
 import 'package:uberscousin/views/Onboarding/register.dart';
 import 'package:uberscousin/views/Onboarding/reset_password.dart';
 
@@ -167,9 +166,16 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildSocialBtn(AssetImage logo) {
+  Widget _buildSocialBtn(AssetImage logo, String text) {
     return GestureDetector(
-      onTap: () => {AuthService().signInWithGoogle()},
+      onTap: () => {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              backgroundColor: Colors.blue,
+              content:
+                  Text('Sign Up with $text currently not functional. Sorry!')),
+        )
+      },
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -201,11 +207,13 @@ class _LoginPageState extends State<LoginPage> {
             const AssetImage(
               'assets/images/facebook.jpg',
             ),
+            'Facebook',
           ),
           _buildSocialBtn(
             const AssetImage(
               'assets/images/google.jpg',
             ),
+            'Google',
           ),
         ],
       ),

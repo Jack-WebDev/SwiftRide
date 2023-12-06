@@ -199,14 +199,10 @@ class _HomePageState extends State<HomePage> {
                           TextField(
                             controller: _time,
                             decoration: const InputDecoration(
-                                label: Padding(
-                              padding: EdgeInsets.only(bottom: 10),
-                              child: Text(
-                                "Time(15:00)",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                            )),
+                              labelText: "Time(15:00)",
+                              labelStyle:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
                           ),
                           const SizedBox(
                             height: 20,
@@ -249,7 +245,9 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 "Car Capacity",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                             )),
                           ),

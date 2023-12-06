@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uberscousin/views/Profile/faq.dart';
 import 'package:uberscousin/views/Profile/manage_account.dart';
+import 'package:uberscousin/views/Profile/promotions.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -118,9 +119,17 @@ class _ProfileState extends State<Profile> {
                           title: Text("Settings"),
                           leading: Icon(Icons.settings),
                         ),
-                        const ListTile(
-                          title: Text("Promotions"),
-                          leading: Icon(Icons.wallet),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Promotions()));
+                          },
+                          child: const ListTile(
+                            title: Text("Promotions"),
+                            leading: Icon(Icons.abc),
+                          ),
                         ),
                         const ListTile(
                           title: Text("Help"),

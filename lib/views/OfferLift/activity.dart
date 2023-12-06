@@ -70,13 +70,13 @@ Widget _card(Future<DocumentSnapshot> listDetails) {
   CollectionReference _listDetails =
       FirebaseFirestore.instance.collection("offerlift");
 
-  Future<void> isLiftAvailable() {
-    return _listDetails
-        .doc("IY4PAlonDDiF23HLRjUZ")
-        .update({"Lift Available": "false"})
-        .then((value) => print("User Updated"))
-        .catchError((error) => print("Failed to update user: $error"));
-  }
+  // Future<void> isLiftAvailable() {
+  //   return _listDetails
+  //       .doc("IY4PAlonDDiF23HLRjUZ")
+  //       .update({"Lift Available": "false"})
+  //       .then((value) => print("User Updated"))
+  //       .catchError((error) => print("Failed to update user: $error"));
+  // }
 
   Future<void> updateLift() {
     return _listDetails
@@ -100,58 +100,92 @@ Widget _card(Future<DocumentSnapshot> listDetails) {
     future: listDetails,
     builder: (context, snapshot) {
       if (snapshot.hasError) {
-        return Text("Something went wrong");
+        return const Text("Something went wrong");
       }
 
       if (snapshot.hasData && !snapshot.data!.exists) {
-        return Text("Document does not exist");
+        return const Text("Document does not exist");
       }
 
       if (snapshot.connectionState == ConnectionState.done) {
         Map<String, dynamic> data =
             snapshot.data!.data() as Map<String, dynamic>;
-        return Column(
-          children: [
-            Text("Driver Name: ${data["Driver Name"]}"),
-            SizedBox(
-              height: 5,
-            ),
-            Text("Car Capacity: ${data["Car Capacity"]}"),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: Row(
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 80),
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue, width: 2),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.black,
+                    offset: Offset(
+                      5.0,
+                      5.0,
+                    ),
+                    blurRadius: 10.0,
+                    spreadRadius: 2.0,
+                  ), //BoxShadow
+                  BoxShadow(
+                    color: Colors.blue,
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 0.0,
+                    spreadRadius: 0.0,
+                  ),
+                ]),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        updateLift();
-                      },
-                      child: Text("Edit Lift")),
-                  SizedBox(
-                    width: 15,
+                  Text(
+                    "Driver Name: ${data["Driver Name"]}",
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        deleteUser();
-                      },
-                      child: Text("Delete Lift")),
-                  SizedBox(
-                    width: 15,
+                  const SizedBox(
+                    height: 5,
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        isLiftAvailable();
-                      },
-                      child: Text("Get Lift"))
+                  Text("Car Capacity: ${data["Car Capacity"]}",
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 20)),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              updateLift();
+                            },
+                            child: const Text("Edit Lift",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              deleteUser();
+                            },
+                            child: const Text("Delete Lift",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
-            )
-          ],
+            ),
+          ),
         );
       }
 
-      return Text("loading");
+      return const Text("Loading....");
     },
   );
 }

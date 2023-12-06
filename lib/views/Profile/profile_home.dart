@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uberscousin/views/Profile/faq.dart';
 import 'package:uberscousin/views/Profile/manage_account.dart';
 
 class Profile extends StatefulWidget {
@@ -125,9 +126,17 @@ class _ProfileState extends State<Profile> {
                           title: Text("Help"),
                           leading: Icon(Icons.help),
                         ),
-                        const ListTile(
-                          title: Text("FAQ"),
-                          leading: Icon(Icons.abc),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FAQ()));
+                          },
+                          child: const ListTile(
+                            title: Text("FAQ"),
+                            leading: Icon(Icons.abc),
+                          ),
                         ),
                         const ListTile(
                           title: Text("About"),

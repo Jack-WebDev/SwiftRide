@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ManageAccount extends StatefulWidget {
   const ManageAccount({super.key});
@@ -9,7 +10,34 @@ class ManageAccount extends StatefulWidget {
 }
 
 class _ManageAccountState extends State<ManageAccount> {
-    int _selectedIndex = 0;
+  // XFile? _pickedImage;
+  // Uint8List? _imageBytes;
+
+  // Future<void> _pickImage(ImageSource source) async {
+  //   final pickedImage = await ImagePicker()
+  //       .pickImage(source: source, maxHeight: 100, maxWidth: 100);
+
+  //   if (pickedImage != null) {
+  //     final imageBytes = await pickedImage.readAsBytes();
+
+  //     setState(() {
+  //       _pickedImage = pickedImage;
+  //       _imageBytes = imageBytes;
+  //     });
+  //   }
+  // }
+
+  // Widget _buildImageView() {
+  //   if (_imageBytes == null) {
+  //     return const Center(
+  //       child: Icon(Icons.person),
+  //     );
+  //   } else {
+  //     return Image.memory(_imageBytes!);
+  //   }
+  // }
+
+  int _selectedIndex = 0;
 
   void _navigator(int index) {
     setState(() {
@@ -39,7 +67,48 @@ class _ManageAccountState extends State<ManageAccount> {
               stops: [0.1, 0.4, 0.7, 0.9],
             ),
           ),
-          child: const Text("rgd"),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Jack Swift",
+                    style: TextStyle(fontSize: 40),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.star),
+                      Icon(Icons.star),
+                      Icon(Icons.star),
+                      Icon(Icons.star_half),
+                      Icon(Icons.star_outline),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+              // Stack(
+              //   children: [
+              //     CircleAvatar(
+              //       radius: 50,
+              //       child: _buildImageView(),
+              //     ),
+              //     ElevatedButton(
+              //         onPressed: () {
+              //           _pickImage(ImageSource.gallery);
+              //         },
+              //         child: Text("Choose Image"))
+              //   ],
+              // ),
+            ],
+          ),
         )),
       ),
       bottomNavigationBar: BottomNavigationBar(
